@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='UTF-8'>
+  <title>Document</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    html,body {
+      width: 100%;
+      height: 100%;
+    }
+    .mode {
+      width: 100%;
+      height: 100%;
+    }
+    .bg {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: url(./bg.jpg);
+      background-size: 100% 100%;
+      text-align: center;
+    }
+    img {
+      width: 20%;
+    }
+  </style>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+  <div class="mode">
+    <div class="bg">
+      <img src="./butterfly.png" alt="">
+    </div>
+    <table width="100%">
+      <!-- blur -->
+      <tr>
+        <td width='30%'><span class="title">blur: </span></td>
+        <td width='50%'>
+          <input type="range" name="blur" id="blur" value="0" max="5" min="0">
+        </td>
+        <td width='20%'>
+          <span class="val" id="blurVal"></span>px</td>
+      </tr>
+      <!-- opacity -->
+      <tr>
+        <td><span class="title">opacity: </span></td>
+        <td>
+          <input type="range" name="opacity" id="opacity" value="100" max="100" min="0">
+        </td>
+        <td><span class="val" id="opacityVal"></span>%</td>
+      </tr>
+      <!-- grayscale -->
+      <tr>
+        <td><span class="title">grayscale: </span></td>
+        <td>
+          <input type="range" name="grayscale" id="grayscale" value="0" max="100" min="0">
+        </td>
+        <td><span class="val" id="grayscaleVal"></span>%</td>
+      </tr>
+      <!-- contrast -->
+      <tr>
+        <td><span class="title">contrast: </span></td>
+        <td>
+          <input type="range" name="contrast" id="contrast" value="100" max="200" min="0">
+        </td>
+        <td><span class="val" id="contrastVal"></span>%</td>
+      </tr>
+      <!-- saturate -->
+      <tr>
+        <td><span class="title">saturate: </span></td>
+        <td>
+          <input type="range" name="saturate" id="saturate" value="100" max="200" min="0">
+        </td>
+        <td><span class="val" id="saturateVal"></span>%</td>
+      </tr>
+      <!-- brightness -->
+      <tr>
+        <td><span class="title">brightness: </span></td>
+        <td>
+          <input type="range" name="brightness" id="brightness" value="100" max="200" min="0">
+        </td>
+        <td><span class="val" id="brightnessVal"></span>%</td>
+      </tr>
+      <!-- sepia -->
+      <tr>
+        <td><span class="title">sepia: </span></td>
+        <td>
+          <input type="range" name="sepia" id="sepia" value="0" max="100" min="0">
+        </td>
+        <td><span class="val" id="sepiaVal"></span>%</td>
+      </tr>
+      <!-- hue-rotate -->
+      <tr>
+        <td><span class="title">hueRotate: </span></td>
+        <td>
+          <input type="range" name="hueRotate" id="hueRotate" value="0" max="360" min="0">
+        </td>
+        <td><span class="val" id="hueRotateVal"></span>deg</td>
+      </tr>
+      <!-- invert -->
+      <tr>
+        <td><span class="title">invert: </span></td>
+        <td>
+          <input type="range" name="invert" id="invert" value="0" max="100" min="0">
+        </td>
+        <td><span class="val" id="invertVal"></span>%</td>
+      </tr>
+    </table>
+  </div>
+
+  <script>
+    $(function () {
+      var val = $('#blur').val();$('#blurVal').html(val);
+      var val = $('#opacity').val();$('#opacityVal').html(val);
+      var val = $('#grayscale').val();$('#grayscaleVal').html(val);
+      var val = $('#contrast').val();$('#contrastVal').html(val);
+      var val = $('#saturate').val();$('#saturateVal').html(val);
+      var val = $('#brightness').val();$('#brightnessVal').html(val);
+      var val = $('#sepia').val();$('#sepiaVal').html(val);
+      var val = $('#hueRotate').val();$('#hueRotateVal').html(val);
+      var val = $('#invert').val();$('#invertVal').html(val);
+    })
+
+    /* blur */
+    $('#blur').change(function () {
+      var val = $(this).val();$('#blurVal').html(val);
+      processStyle('img', 'filter', 'blur', val, 'px');
+    })
+    /* opacity */
+    $('#opacity').change(function () {
+      var val = $(this).val();$('#opacityVal').html(val);
+      processStyle('img', 'filter', 'opacity', val, '%');
+    })
+    /* grayscale */
+    $('#grayscale').change(function () {
+      var val = $(this).val();$('#grayscaleVal').html(val);
+      processStyle('img', 'filter', 'grayscale', val, '%');
+    })
+    /* contrast */
+    $('#contrast').change(function () {
+      var val = $(this).val();$('#contrastVal').html(val);
+      processStyle('img', 'filter', 'contrast', val, '%');
+    })
+    /* saturate */
+    $('#saturate').change(function () {
+      var val = $(this).val();$('#saturateVal').html(val);
+      processStyle('img', 'filter', 'saturate', val, '%');
+    })
+    /* brightness */
+    $('#brightness').change(function () {
+      var val = $(this).val();$('#brightnessVal').html(val);
+      processStyle('img', 'filter', 'brightness', val, '%');
+    })
+    /* sepia */
+    $('#sepia').change(function () {
+      var val = $(this).val();$('#sepiaVal').html(val);
+      processStyle('img', 'filter', 'sepia', val, '%');
+    })
+    /* hue-rotate */
+    $('#hueRotate').change(function () {
+      var val = $(this).val();$('#hueRotateVal').html(val);
+      processStyle('img', 'filter', 'hue-rotate', val, 'deg');
+    })
+    /* invert */
+    $('#invert').change(function () {
+      var val = $(this).val();$('#invertVal').html(val);
+      processStyle('img', 'filter', 'invert', val, '%');
+    })
+
+    // 样式处理
+    function processStyle(ele, attr, currentAttr, currentVal, unit) {
+      if ($(ele).css(attr) === "none") {
+        $(ele).css({
+          filter: currentAttr + '(' + currentVal + unit + ')'
+        })
+      }
+      if ($(ele).css(attr) !== "none") {
+        var styleArr = $(ele).css(attr).split(' ')
+        var styleMap = {}
+        styleArr.map(function (key) {
+          var value = key.split(/\(|\)/)
+          styleMap[value[0]] = value[1]
+        })
+        styleMap[currentAttr] = currentVal + unit
+        var styleStr = ''
+        for (const key in styleMap) {
+          if (styleMap.hasOwnProperty(key)) {
+            styleStr += key + '(' + styleMap[key] + ') '
+          }
+        }
+        $(ele).css({
+          filter: styleStr
+        })
+      }
+    }
+  </script>
+</body>
+</html>
